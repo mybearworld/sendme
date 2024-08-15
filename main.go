@@ -13,21 +13,21 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Please specify username and post content.")
 		return
 	}
-	username := os.Args[1]
-	postContent := os.Args[2]
-	err := Post(username, postContent)
+	user := os.Args[1]
+	content := os.Args[2]
+	err := Post(PostRequest{user, content})
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
 }
 
-type Request struct {
+type PostRequest struct {
 	User    string `json:"user"`
 	Content string `json:"content"`
 }
 
-func Post(username, postContent string) error {
-	body, err := json.Marshal(Request{username, postContent})
+func Post(postRequest PostRequest) error {
+	body, err := json.Marshal(postRequest)
 	if err != nil {
 		return err
 	}
