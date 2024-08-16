@@ -36,6 +36,7 @@ func Post(postRequest PostRequest) error {
 	if err != nil {
 		return err
 	}
+	defer response.Body.Close()
 	if response.StatusCode >= 400 {
 		return fmt.Errorf("server returned %s", response.Status)
 	}
