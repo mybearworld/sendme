@@ -32,6 +32,12 @@ func Post(postRequest PostRequest) error {
 		return err
 	}
 	reader := bytes.NewReader(body)
-	http.Post("https://sendme.josueart40.workers.dev", "application/json", reader)
+	response, err := http.Post("https://sendme.josueart40.workers.dev", "application/json", reader)
+	if err != nil {
+		return err
+	}
+	if response.StatusCode >= 400 {
+		return fmt.Errorf("server returned %s", response.Status)
+	}
 	return nil
 }
