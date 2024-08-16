@@ -10,14 +10,14 @@ import (
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Fprintln(os.Stderr, "Please specify username and post content.")
+		fmt.Fprintln(os.Stderr, "sendme: please specify username and post content")
 		return
 	}
 	user := os.Args[1]
 	content := os.Args[2]
 	err := Post(PostRequest{user, content})
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		fmt.Fprintf(os.Stderr, "sendme: %v\n", err)
 	}
 }
 
